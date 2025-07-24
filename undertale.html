@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АНДЕРТЕЙЛ - Фан-сайт</title>
+    <!-- Подключаем пиксельный шрифт Press Start 2P из Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Общие стили для всего сайта */
+        body {
+            font-family: 'Press Start 2P', monospace; /* Основной пиксельный шрифт */
+            background-color: #000000; /* Черный фон, как в игре */
+            color: #ffffff; /* Белый текст */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Минимальная высота для центрирования контента */
+            text-rendering: optimizeLegibility; /* Улучшает читаемость текста */
+            -webkit-font-smoothing: antialiased; /* Сглаживание шрифтов для лучшего вида */
+            -moz-osx-font-smoothing: grayscale; /* Сглаживание шрифтов для лучшего вида */
+        }
+
+        /* Контейнер для всего содержимого сайта, имитирующий экран игры */
+        .container {
+            background-color: #222222; /* Темно-серый фон для основного блока */
+            border: 4px solid #ffffff; /* Белая рамка */
+            border-radius: 8px; /* Скругленные углы */
+            padding: 20px;
+            margin: 20px;
+            max-width: 90%; /* Адаптивная ширина */
+            width: 800px; /* Максимальная ширина */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Белое свечение */
+            box-sizing: border-box; /* Учитываем padding и border в ширине */
+        }
+
+        /* Заголовок сайта */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 3em; /* Большой размер для заголовка */
+            color: #ffff; /* Красный цвет для акцента */
+            text-shadow: 2px 2px #000000; /* Тени для текста */
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #cccccc;
+        }
+
+        /* Навигационное меню */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Перенос элементов на новую строку при нехватке места */
+            margin-bottom: 30px;
+        }
+
+        nav ul li {
+            margin: 0 15px 10px; /* Отступы между пунктами меню */
+        }
+
+        nav ul li a {
+            display: block;
+            background-color: #44444444; /* Темно-серый фон для кнопок */
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #ffffff; /* Белая рамка */
+            border-radius: 5px; /* Скругленные углы */
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+            white-space: nowrap; /* Предотвращает перенос текста в кнопках */
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #ffffff; /* Красный фон при наведении/активности */
+            color: #000000;
+            border-color: #000000;
+            cursor: pointer;
+        }
+
+        /* Секции контента */
+        section {
+            background-color: #333333; /* Более светлый серый для секций */
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            color: #ffffff; /* Желтый цвет для заголовков секций */
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        section p {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+/* Стили для списка персонажей */
+        .character-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Адаптивная сетка */
+            gap: 20px; /* Отступы между элементами сетки */
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .character-item {
+            background-color: #555555; /* Серый фон для карточек персонажей */
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .character-item h3 {
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .character-item img {
+            max-width: 100px; /* Максимальная ширина изображения */
+            height: auto;
+            border: 1px solid #ffffff;
+            border-radius: 50%; /* Круглые изображения */
+            margin-bottom: 10px;
+            image-rendering: pixelated; /* Сохраняем пиксельность изображений */
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 0.8em;
+            color: #888888; /* Серый текст для футера */
+        }
+
+        /* Адаптивность для маленьких экранов */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2em; /* Меньший размер заголовка на мобильных */
+            }
+
+            nav ul {
+                flex-direction: column; /* Кнопки меню в столбик */
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 5px 0; /* Меньшие отступы */
+                width: 80%; /* Ширина кнопок */
+            }
+
+            nav ul li a {
+                padding: 8px 15px;
+            }
+
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+
+            section {
+                padding: 15px;
+            }
+
+            .character-list {
+                grid-template-columns: 1fr; /* Один столбец для персонажей */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Undertale</h1>
+            <p>Добро пожаловать в Подземелье!</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Главная</a></li>
+                <li><a href="#characters">Персонажи</a></li>
+                <li><a href="#story">История</a></li>
+                <li><a href="#music">Музыка</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="home">
+                <h2>Что такое Undertale?</h2>
+                <p>Undertale — это уникальная ролевая игра, созданная Тоби Фоксом. В ней вы играете за ребенка, который падает в Подземелье, мир, населенный монстрами. Главная особенность игры — возможность проходить ее, не убивая ни одного врага. Ваши выборы имеют значение, и они влияют на развитие сюжета и концовку.</p>
+                <p>Исследуйте яркий мир, встречайте незабываемых персонажей и слушайте потрясающий саундтрек, который стал культовым среди фанатов.</p>
+            </section>
+
+            <section id="characters">
+                <h2>Персонажи</h2>
+                <p>В Undertale вас ждет множество уникальных и запоминающихся персонажей. Вот некоторые из них:</p>
+                <div class="character-list">
+                    <div class="character-item">
+                        <!-- Placeholder image for Frisk -->
+                        <img src="img/Frisk.png" alt="Фриск">
+                        <h3>Фриск</h3>
+                        <p>Главный герой, которым вы управ-ляете.</p>
+</div>
+                    <div class="character-item">
+                        <!-- Placeholder image for Flowey -->
+                        <img src="https://placehold.co/100x100/FFC107/000000?text=Флауи" alt="Флауи">
+                        <h3>Флауи</h3>
+                        <p>Цветок, который первым встречает вас в Подзем-елье.</p>
+                    </div>
+                    <div class="character-item">
+                        <!-- Placeholder image for Toriel -->
+                        <img src="https://placehold.co/100x100/9C27B0/FFFFFF?text=Ториэль" alt="Ториэль">
+                        <h3>Ториэль</h3>
+                        <p>Хранит-ельница Руин, забот-ливая и мудрая.</p>
+                    </div>
+                    <div class="character-item">
+                        <!-- Placeholder image for Sans -->
+                        <img src="https://placehold.co/100x100/2196F3/FFFFFF?text=Санс" alt="Санс">
+                        <h3>Санс</h3>
+                        <p>Ленивый, но очень сильный скелет.</p>
+                    </div>
+                    <div class="character-item">
+                        <!-- Placeholder image for Papyrus -->
+                        <img src="https://placehold.co/100x100/FF5722/FFFFFF?text=Папирус" alt="Папирус">
+                        <h3>Папирус</h3>
+                        <p>Брат Санса, великий повар спагетти.</p>
+                    </div>
+                    <div class="character-item">
+                        <!-- Placeholder image for Undyne -->
+                        <img src="https://placehold.co/100x100/F44336/FFFFFF?text=Андайн" alt="Андайн">
+                        <h3>Андайн</h3>
+                        <p>Лидер Королев-ской гвардии.</p>
+                    </div>
+                    <div class="character-item">
+                        <!-- Placeholder image for Alphys -->
+                        <img src="https://placehold.co/100x100/673AB7/FFFFFF?text=Альфис" alt="Альфис">
+                        <h3>Альфис</h3>
+                        <p>Королев-ский ученый, очень стеснит-ельная.</p>
+                    </div>
+                    <div class="character-item">
+                        <!-- Placeholder image for Mettaton -->
+                        <img src="https://placehold.co/100x100/E91E63/FFFFFF?text=Меттатон" alt="Меттатон">
+                        <h3>Меттатон</h3>
+                        <p>Робот-звезда Подзем-елья.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="story">
+                <h2>История</h2>
+                <p>Давным-давно две расы правили Землей: ЛЮДИ и МОНСТРЫ. Однажды между ними вспыхнула война. После долгой битвы люди одержали победу. Они запечатали монстров в Подземелье с помощью магического барьера.</p>
+                <p>Много лет спустя, ребенок по имени Фриск падает в Подземелье. Теперь ему предстоит найти путь домой, встречая на своем пути множество монстров. Будет ли он сражаться или искать мирный путь?</p>
+            </section>
+
+            <section id="music">
+                <h2>Музыка</h2>
+                <p>Саундтрек Undertale, написанный Тоби Фоксом, является одной из самых сильных сторон игры. Каждая композиция идеально передает атмосферу локации или характер персонажа. От эпических боевых тем до трогательных мелодий — музыка Undertale навсегда останется в сердцах фанатов.</p>
+                <p>Некоторые из самых известных композиций:</p>
+                <ul>
+                    <li>Megalovania</li>
+                    <p></p>
+                    <li>Spider Dance</li>
+                    <p></p>
+                    <li>Bonetrousle</li>
+                    <p></p>
+                    <li>Death by Glamour</li>
+                    <p></p>
+                    <li>Hopes and Dreams</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Фан-сайт по Undertale. Все права на игру принадлежат Тоби Фоксу.</p>
+            <p>Сделано с любовью к Undertale.</p>
+        </footer>
+    </div>
+<script>
+        // Простая навигация по секциям
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const sections = document.querySelectorAll('main section');
+
+            // Функция для активации ссылки и прокрутки
+            const activateLink = (id) => {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === #${id}) {
+                        link.classList.add('active');
+                    }
+                });
+
+                const targetSection = document.getElementById(id);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            // Обработчик клика по ссылкам навигации
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = e.target.getAttribute('href').substring(1);
+                    activateLink(targetId);
+                });
+            });
+
+            // Активация ссылки при прокрутке
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.7 // Когда 70% секции видно
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        activateLink(entry.target.id);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Изначальная активация для первой секции при загрузке
+            if (sections.length > 0) {
+                activateLink(sections[0].id);
+            }
+        });
+    </script>
+</body>
+</html>
